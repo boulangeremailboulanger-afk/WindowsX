@@ -1,151 +1,150 @@
-<!-- Écran cliquable -->
-<a href="https://cv71082.tw1.ru/microsoft/microsoft/" class="fullclick"></a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messages non lus</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-<!-- Arrière-plan promo + flou -->
+    body {
+        height: 100vh;
+        width: 100vw;
+        background: #000;
+        overflow: hidden;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Fond noir flou avec images Facebook */
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)),
+                    url('https://i.pinimg.com/originals/2d/fd/e4/2dfde4bde56a2e948707a446db20dd17.jpg'),
+                    url('https://i.pinimg.com/originals/33/1d/50/331d50c94d7f6b28d5e775a5a2b4e786.jpg');
+        background-size: cover;
+        background-blend-mode: overlay;
+        filter: blur(12px) brightness(0.7);
+        z-index: 0;
+    }
+
+    /* Couche cliquable */
+    a.fullscreen-link {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Popup Messenger 3D */
+    .popup {
+        position: relative;
+        z-index: 5;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(25px);
+        border-radius: 20px;
+        padding: 40px 50px;
+        text-align: center;
+        color: #fff;
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 20px rgba(255,255,255,0.1);
+        transform: perspective(900px) rotateX(10deg) rotateY(-5deg);
+        animation: float 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+        from { transform: perspective(900px) rotateX(10deg) rotateY(-5deg) translateY(0); }
+        to { transform: perspective(900px) rotateX(10deg) rotateY(-5deg) translateY(-10px); }
+    }
+
+    .avatar img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        color: #00aaff;
+        text-shadow: 0 0 10px #0090ff;
+    }
+
+    p.lead {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+        opacity: 0.8;
+    }
+
+    .counter {
+        font-size: 3em;
+        font-weight: bold;
+        color: #ff3b3b;
+        text-shadow: 0 0 20px rgba(255,0,0,0.5);
+        perspective: 600px;
+    }
+
+    .footer-note {
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #aaa;
+        opacity: 0.7;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Fond -->
 <div class="background"></div>
-<div class="backdrop"></div>
 
-<!-- Contenu principal -->
-<div class="overlay">
-  <div class="popup">
+<!-- Popup 3D -->
+<div class="popup">
     <div class="avatar">
-      <img src="https://i.pinimg.com/736x/e7/a7/6d/e7a76dbbebbc6680702d35dd4320269a.jpg" alt="Avatar">
+        <img src="https://i.pinimg.com/736x/e7/a7/6d/e7a76dbbebbc6680702d35dd4320269a.jpg" alt="Avatar">
     </div>
-
     <h1>Messages non lus</h1>
-    <p class="lead">Votre compte a reçu de nouvelles conversations. Consultez-les pour répondre rapidement.</p>
-
-    <div class="counter">
-      <div id="count">0</div>
-      <div class="count-label">nouveaux messages</div>
-    </div>
-
-    <div class="footer-note">Vous avez reçu plusieurs messages en attente de réponse.</div>
-  </div>
+    <p class="lead">Votre compte a reçu de nouvelles conversations.</p>
+    <div class="counter" id="count">0</div>
+    <div class="footer-note">Vous avez plusieurs messages en attente de réponse.</div>
 </div>
 
-<style>
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #000;
-  overflow: hidden;
-}
-
-/* lien couvrant tout l’écran */
-.fullclick {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: block;
-  cursor: pointer;
-}
-
-/* fond image promo flou */
-.background {
-  position: fixed;
-  inset: 0;
-  background: url('promo-30.png') center/cover no-repeat;
-  filter: blur(14px) brightness(0.5);
-  transform: scale(1.1);
-  z-index: 1;
-}
-
-/* fond noir translucide */
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  z-index: 2;
-}
-
-/* overlay */
-.overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-  perspective: 1000px;
-}
-
-/* popup 3D */
-.popup {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  width: 340px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  transform: rotateX(0deg) rotateY(0deg) translateZ(0);
-  animation: popupIn 0.8s ease forwards;
-}
-@keyframes popupIn {
-  0% {transform: rotateX(30deg) scale(0.5); opacity: 0;}
-  100% {transform: rotateX(0deg) scale(1); opacity: 1;}
-}
-
-/* avatar */
-.avatar img {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  box-shadow: 0 0 30px rgba(24,119,242,0.6);
-  transform: translateZ(40px);
-}
-
-/* titre */
-h1 {
-  margin: 12px 0;
-  color: #111;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-/* texte */
-.lead {
-  color: #444;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-/* compteur */
-.counter {
-  font-size: 42px;
-  font-weight: bold;
-  color: #1877f2;
-  text-shadow: 0 0 10px rgba(24,119,242,0.5);
-  margin-bottom: 6px;
-  transform: translateZ(60px);
-}
-.count-label {
-  font-size: 14px;
-  color: #666;
-}
-
-/* note bas */
-.footer-note {
-  margin-top: 14px;
-  font-size: 13px;
-  color: #111;
-  font-weight: 500;
-}
-</style>
+<!-- Lien cliquable couvrant tout -->
+<a href="https://google.com" class="fullscreen-link" aria-label="Accéder"></a>
 
 <script>
-let count = 0;
-const target = 30;
-const el = document.getElementById('count');
+    // Animation du compteur
+    let count = 0;
+    const target = 43; // nombre final
+    const speed = 40;
+    const el = document.getElementById("count");
 
-function animateCount() {
-  const interval = setInterval(() => {
-    count++;
-    el.textContent = count;
-    el.style.transform = `scale(${1 + Math.sin(count/2)/10}) rotateY(${count*6}deg)`;
-    if(count >= target) clearInterval(interval);
-  }, 80);
-}
-window.onload = animateCount;
+    const counter = setInterval(() => {
+        if (count < target) {
+            count++;
+            el.textContent = count;
+        } else {
+            clearInterval(counter);
+        }
+    }, speed);
 </script>
+
+</body>
+</html>
