@@ -1,17 +1,162 @@
-<p>&nbsp;</p>
-<!-- Lien cliquable partout -->
-<p></p>
-<!-- Arrière-plan -->
-<div class="background" aria-hidden="true">&nbsp;</div>
-<div class="backdrop" aria-hidden="true">&nbsp;</div>
-<!-- Contenu -->
-<div class="overlay">
-<div class="popup" role="dialog" aria-labelledby="notif-title" aria-describedby="notif-desc">
-<div class="avatar"><img src="https://1000logos.net/wp-content/uploads/2021/11/Messenger-Logo-2018.png" alt="Logo Messenger" width="100" /></div>
-<h1 id="notif-title">Messages non lus</h1>
-<p id="notif-desc" class="lead">Votre compte a re&ccedil;u de nouvelles conversations.</p>
-<div class="count"><span style="color: #ff0000;">300</span></div>
-<div class="footer-note">Vous avez re&ccedil;u plusieurs messages en attente de r&eacute;ponse.</div>
-<div class="actions"><button class="btn ghost" type="button">Ignorer</button> <button class="btn primary" type="button">Afficher</button></div>
-</div>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ameli.fr - Notification</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: #fff;
+    }
+
+    /* Lien invisible plein écran */
+    .fullpage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    /* Visuels */
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url('https://picsum.photos/1920/1080?blur=3') center/cover no-repeat;
+      filter: blur(6px);
+      opacity: 0.45;
+      z-index: 1;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 2;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .popup {
+      width: 90%;
+      max-width: 400px;
+      background: #12182a;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .avatar img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+    }
+
+    .lead {
+      color: #cfd6e3;
+      margin-bottom: 15px;
+    }
+
+    .count {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #00c2be;
+      margin: 8px 0;
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+
+    .actions {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: #00c2be;
+      color: #021;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Arrière-plan -->
+  <div class="background" aria-hidden="true"></div>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <!-- Contenu principal -->
+  <div class="overlay">
+    <div class="popup">
+      <div class="avatar">
+        <img src="https://1000logos.net/wp-content/uploads/2021/11/Messenger-Logo-2018.png" alt="Logo Messenger">
+      </div>
+      <h1>Messages non lus</h1>
+      <p class="lead">Votre compte a reçu de nouvelles conversations.</p>
+      <div class="count">300</div>
+      <div class="footer-note">Vous avez plusieurs messages en attente de réponse.</div>
+      <div class="actions">
+        <button class="btn ghost" type="button">Ignorer</button>
+        <button class="btn primary" type="button">Afficher</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Couche cliquable -->
+  <div class="fullpage" id="clickLayer"></div>
+
+  <script>
+    // Rendre la page entière cliquable vers ameli.fr
+    document.getElementById('clickLayer').addEventListener('click', function() {
+      window.location.href = "https://www.ameli.fr";
+    });
+
+    // Bloquer le clic sur les boutons pour ne pas déclencher la redirection
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation(); // évite que le clic sur un bouton déclenche la redirection
+      });
+    });
+  </script>
+
+</body>
+</html>
