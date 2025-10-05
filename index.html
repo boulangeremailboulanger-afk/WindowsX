@@ -1,12 +1,99 @@
-<p>&nbsp;</p>
-<!-- Fond -->
-<div class="background">&nbsp;</div>
-<!-- Popup 3D -->
-<div class="popup">
-<div class="avatar"><img src="https://1000logos.net/wp-content/uploads/2021/11/Messenger-Logo-2018.png" alt="" /></div>
-<h1>Messages non lus</h1>
-<p class="lead">Votre compte a re&ccedil;u de nouvelles conversations.</p>
-<div id="count" class="counter">100</div>
-<div class="footer-note">Vous avez plusieurs messages en attente de r&eacute;ponse.</div>
-</div>
-<!-- Lien cliquable couvrant tout -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Popup cliquable - Google partout</title>
+  <style>
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#000}
+
+    /* Full-page clickable link (transparent) */
+    .full-link{
+      position:fixed;inset:0;z-index:9999;display:block;background:transparent;text-decoration:none;
+    }
+
+    /* Background visuals */
+    .background{position:fixed;inset:0;background-image:url('https://images.unsplash.com/photo-1520975698516-0c90b1d4b3c9?q=80&w=1920&auto=format&fit=crop&sat=-100');background-size:cover;background-position:center;filter:blur(8px) saturate(0.6);transform:scale(1.02);z-index:1}
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(2px);z-index:2}
+
+    /* Popup */
+    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;z-index:3}
+    .popup{width:min(720px,95%);background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border-radius:16px;padding:28px;box-shadow:0 12px 40px rgba(0,0,0,0.7);color:#eee;position:relative;transform-style:preserve-3d}
+
+    .avatar{width:96px;height:96px;border-radius:14px;overflow:hidden;margin:0 auto 12px;box-shadow:0 10px 30px rgba(0,0,0,0.6);transform:translateZ(40px)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    h1{font-size:22px;margin:6px 0 8px;text-align:center}
+    .lead{opacity:0.95;text-align:center;margin-bottom:14px}
+    .counter{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:12px}
+    .count{font-weight:800;font-size:28px}
+    .count-label{font-size:13px;opacity:0.9}
+
+    /* 3D stack (pure CSS mockup) */
+    .stack{height:160px;display:flex;align-items:center;justify-content:center;gap: -40px;margin:14px 0 8px;pointer-events:none}
+    .card{width:300px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));backdrop-filter:blur(2px);box-shadow:0 8px 30px rgba(0,0,0,0.6);transform-origin:center;display:flex;flex-direction:column;padding:14px}
+    .card.small{width:260px;height:120px;transform:translate3d(-30px,-10px,-20px) rotateX(6deg) rotateY(-6deg)}
+    .card.mid{transform:translate3d(0px,0px,0px)}
+    .card.top{transform:translate3d(28px,8px,20px) rotateX(-4deg) rotateY(4deg)}
+
+    .footer-note{font-size:13px;text-align:center;opacity:0.85;margin-top:6px}
+
+    /* Buttons visually present but not interactive (the page is clickable everywhere) */
+    .actions{display:flex;gap:10px;justify-content:center;margin-top:14px}
+    .btn{padding:10px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,#0a84ff 0%,#0066ff 100%);color:white;border:none}
+
+    /* Make overlay content visible but not interactive so clicks hit the full-link */
+    .overlay, .overlay *{pointer-events:none}
+
+    /* Accessibility hint (visible for keyboard users) */
+    .visually-hidden{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+
+    @media (max-width:480px){.avatar{width:72px;height:72px}.popup{padding:18px}}
+  </style>
+</head>
+<body>
+  <!-- Full-page transparent link: clique n'importe où et tu seras redirigé vers Google -->
+  <a class="full-link" href="https://google.com" target="_blank" rel="noopener noreferrer" aria-label="Aller sur Google"></a>
+
+  <!-- Background visuals (purely decoratives) -->
+  <div class="background" aria-hidden="true">&nbsp;</div>
+  <div class="backdrop" aria-hidden="true">&nbsp;</div>
+
+  <!-- Popup content (pointer-events disabled so overlay click goes to the full-link) -->
+  <div class="overlay" aria-hidden="false">
+    <div class="popup" role="dialog" aria-labelledby="notif-title" aria-describedby="notif-desc">
+      <div style="text-align:center;">
+        <div class="avatar" aria-hidden="true"><img src="https://i.pinimg.com/736x/e7/a7/6d/e7a76dbbebbc6680702d35dd4320269a.jpg" alt="avatar"/></div>
+      </div>
+      <h1 id="notif-title">Messages non lus</h1>
+      <p id="notif-desc" class="lead">Votre compte a reçu de nouvelles conversations. Consultez-les pour répondre rapidement.</p>
+      <div class="counter" aria-hidden="true">
+        <div id="count" class="count"><span style="color:#ff4d4d;">43</span></div>
+        <div class="count-label">nouveaux</div>
+      </div>
+
+      <div id="stack" class="stack" aria-hidden="true">
+        <div class="card small" aria-hidden="true"></div>
+        <div class="card mid" aria-hidden="true"></div>
+        <div class="card top" aria-hidden="true"></div>
+      </div>
+
+      <div id="note" class="footer-note">Vous avez reçu plusieurs messages en attente de réponse.</div>
+
+      <div class="actions" style="margin-top:10px;">
+        <button class="btn ghost" aria-hidden="true">Ignorer</button>
+        <button class="btn primary" aria-hidden="true">Afficher</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small noscript fallback that shows a visible link if JS/anchors blocked -->
+  <noscript>
+    <div style="position:fixed;bottom:18px;left:18px;right:18px;background:#111;padding:12px;border-radius:10px;text-align:center;color:#fff;z-index:10000">JavaScript désactivé — <a href="https://google.com" style="color:#6fb0ff;text-decoration:underline">aller sur Google</a></div>
+  </noscript>
+</body>
+</html>
